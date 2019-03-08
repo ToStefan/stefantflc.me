@@ -1,4 +1,5 @@
-var basePath = 'http://localhost:8080/api';
+//var basePath = 'http://localhost:8080/api';
+var basePath = 'portfolio-st.herokuapp.com/api';
 var activeEl = 0;
 
 var RadioManager = {
@@ -136,7 +137,7 @@ var SongManager = {
 var UserManager = {
 		
 	signIn : function() {
-		$("#btnSignIn").prop("disabled",true);
+		$("#btnSubmitSignIn").prop("disabled",true);
 		$.ajax({
 			url : basePath + '/auth/sign-in',
 			dataType : 'json',
@@ -151,9 +152,10 @@ var UserManager = {
 				$('#loginUsername').val('');
 				$('#loginPassword').val('');
 				DocumentManager.navFix(0, $('#btnSignIn'));
-				$("#btnSignIn").prop("disabled",false);
+				$("#btnSubmitSignIn").prop("disabled",false);
 			},
 			error : function(data, textStatus, xhr) {
+				$("#btnSubmitSignIn").prop("disabled",false);
 				alert('User not found!');
 			}
 		});
