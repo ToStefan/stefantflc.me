@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Stefan T.</title>
+	<link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" href="assets/css/styles.css">
+	<link rel="stylesheet" href="assets/css/player.css">
+</head>
+<body>
+	<div class="container">
+		<div class="row">
+			<div class="btn-group btn-group-justified navigationGroup">
+				<div class="btn-group">
+					<button id="btnHome" type="button" class="btn btn-nav">
+						<p>Home</p>
+					</button>
+				</div>
+				<div class="btn-group">
+					<button id="btnPortfolio" type="button" class="btn btn-nav">
+						<p>Portfolio</p>
+					</button>
+				</div>
+				<div class="btn-group">
+					<button id="btnRadio" type="button" class="btn btn-nav">
+						<p>Radio</p>
+					</button>
+				</div>
+				<div class="btn-group">
+					<button id="btnSignIn" type="button" class="btn btn-nav">
+						<p>Sign in</p>
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div id="playerBox">
+		<audio id="player" autoplay>
+			<source id="mp3Source" type="audio/mpeg" src="">
+		</audio>
+		<button id="btnPlayRadio" type="button" class="btn btn-default">
+  			<img src="assets/icons/play.png">	
+		</button>
+		<button id="btnStopRadio" type="button" class="btn btn-default">
+  			<img src="assets/icons/stop.png">	
+		</button>
+		<div id="playerText">
+			<p id="showSongTitle"></p>
+		</div>
+		<div class="equalizer">
+		    <div></div><div></div><div></div><div></div><div></div>
+		    <div></div><div></div><div></div><div></div><div></div>
+		    <div></div><div></div><div></div><div></div><div></div>
+		</div>
+	</div>
+	
+	<div id="homePage">
+	
+	</div>
+	
+	<div id="portfolioPage">
+	
+	</div>
+	
+	<div id="radioPage">
+		<h2 class="headText">Playlist</h2>
+		<div id="radioPlaylist">
+		</div>
+		<div id="radioControlPanel">
+		</div>
+	</div>
+	
+	<div id="signInPage">
+		<h2 class="headText">Welcome back!</h2><br>
+		<div class="form-group">
+			<input class="textInputField form-control" type="text" id="loginUsername" placeholder="Username">
+		</div>
+		<div class="form-group">
+			<input class="textInputField form-control" type="password" id="loginPassword" placeholder="Password">
+		</div>
+		<button class="btn btn-default" type="button" id="btnSubmitSignIn">Sign in</button>
+	</div>
+	
+	<script src="assets/js/jquery.min.js"></script>
+ 	<script src="assets/bootstrap/js/bootstrap.min.js"></script>
+	<script src="assets/js/main.js"></script>
+</body>
+</html>
