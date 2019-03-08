@@ -75,10 +75,10 @@ public class RadioController {
 		InputStream file;
 
 		for (Song song : songs) {
+			currentSong = song;
 			file = new ByteArrayInputStream(song.getSong());
 			radioPlayer = new Player(file);
 			radioPlayer.play();
-			currentSong = song;
 
 			song.setPlayed(true);
 			songService.save(song);

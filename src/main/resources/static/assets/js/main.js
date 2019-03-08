@@ -1,4 +1,3 @@
-//var basePath = 'http://localhost:8080/api';
 var basePath = 'portfolio-st.herokuapp.com/api';
 var activeEl = 0;
 
@@ -296,19 +295,19 @@ var DocumentManager = {
 		$('#signInPage').hide();
 	},
 	portfolioState : function() {
-		$('#homePage').show();
+		$('#homePage').hide();
 		$('#portfolioPage').show();
 		$('#radioPage').hide();
 		$('#signInPage').hide();
 	},
 	radioState : function() {
-		$('#homePage').show();
+		$('#homePage').hide();
 		$('#portfolioPage').hide();
 		$('#radioPage').show();
 		$('#signInPage').hide();
 	},
 	signInState : function() {
-		$('#homePage').show();
+		$('#homePage').hide();
 		$('#portfolioPage').hide();
 		$('#radioPage').hide();
 		$('#signInPage').show();
@@ -323,19 +322,20 @@ var DocumentManager = {
 
 $(document).ready(function() {
 	
+	DocumentManager.homeState();
+	DocumentManager.playerStopState();
+	$('#showSongTitle').text('Press play to start');
 	DocumentManager.navCheck();
+	
 	if (UtilManager.getLocalItem(0) != null) {
 		UserManager.showLoggedUser();
 		DocumentManager.loggedState();
 	} else {
 		DocumentManager.loggedOutState();
 	}
-	$('#btnStopRadio').hide();
-	DocumentManager.playerStopState();
-	DocumentManager.homeState();
-	$('#showSongTitle').text('Press play to start');
-
 	
+
+	//Sign in
 	$('#btnSubmitSignIn').click(function(e) {
 		e.preventDefault();
 		UserManager.signIn();

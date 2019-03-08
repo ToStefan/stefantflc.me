@@ -164,3 +164,7 @@ body {
 	background-color: rgba(106, 176, 209, 0.8);
 	border-radius: 10px;
 }
+
+.hidden {
+	display: none;
+}
