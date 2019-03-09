@@ -109,6 +109,7 @@ var SongManager = {
 			type : 'GET',
 			url : basePath + '/songs',
 			dataType : 'json',
+			xhrFields: { withCredentials: true },
 			success : function(songs) {
 				$('#radioPlaylist').empty();
 				for (let song of songs) {
