@@ -109,7 +109,6 @@ var SongManager = {
 			type : 'GET',
 			url : basePath + '/songs',
 			dataType : 'json',
-			contentType : 'application/json',
 			success : function(songs) {
 				$('#radioPlaylist').empty();
 				for (let song of songs) {
@@ -139,7 +138,6 @@ var UserManager = {
 		$("#btnSubmitSignIn").prop("disabled",true);
 		$.ajax({
 			url : basePath + '/auth/sign-in',
-			dataType : 'json',
 			type : 'POST',
 			contentType : 'application/json',
 			data : UserManager.loginUserData(),
