@@ -45,9 +45,8 @@ body {
 	#portfolioPage {
 		width: 95%;
 	}
-	#meContainer { 
+	#meContainer {
 		display: none;
-	
 	}
 	#portfolioContainer {
 		text-align: center;
@@ -154,7 +153,7 @@ body {
 	color: #fff;
 	box-shadow: 3px 3px 4px rgba(0, 0, 0, 0.45);
 	font-family: Quicksand, sans-serif;
-	background-color: rgba(44, 40, 52, 0.32);
+	background-color: rgba(44, 40, 52, 0.40);
 	padding: 40px;
 }
 
