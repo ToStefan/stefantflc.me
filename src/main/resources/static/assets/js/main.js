@@ -1,4 +1,4 @@
-var basePath = 'portfolio-st.herokuapp.com/api';
+var basePath = 'stefantflc.me/api';
 var activeEl = 0;
 
 var RadioManager = {
