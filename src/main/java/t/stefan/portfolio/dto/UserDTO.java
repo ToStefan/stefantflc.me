@@ -2,6 +2,8 @@ package t.stefan.portfolio.dto;
 
 import java.io.Serializable;
 
+import t.stefan.portfolio.entity.User;
+
 public class UserDTO implements Serializable {
 
 	private Long id;
@@ -15,6 +17,10 @@ public class UserDTO implements Serializable {
 		this.id = id;
 		this.username = username;
 		this.password = password;
+	}
+	
+	public UserDTO(User user) {
+		this(user.getId(), user.getUsername(), user.getPassword());
 	}
 
 	public Long getId() {
