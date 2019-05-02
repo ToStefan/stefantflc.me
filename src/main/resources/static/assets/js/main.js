@@ -1,4 +1,4 @@
-var basePath = 'http://localhost:8080/api';
+var basePath = 'http://stefantflc.me/api';
 var activeEl = 0;
 
 var RadioManager = {
@@ -109,7 +109,6 @@ var SongManager = {
 			type : 'GET',
 			url : basePath + '/songs',
 			dataType : 'json',
-			headers : UtilManager.createAuthorizationTokenHeader(),
 			success : function(songs) {
 				$('#radioPlaylist').empty();
 				for (let song of songs) {
