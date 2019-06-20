@@ -17,6 +17,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import io.jsonwebtoken.ExpiredJwtException;
+import io.jsonwebtoken.MalformedJwtException;
 
 @Component
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
@@ -45,9 +46,14 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 			try {
 				username = jwtTokenUtil.getUsernameFromToken(authToken);
 			} catch (IllegalArgumentException e) {
+				logger.error("Error while parsing token from username", e);
 			} catch (ExpiredJwtException e) {
+				logger.warn("Token not valid or expired.", e);
+			} catch(MalformedJwtException e) {
+				logger.error("Not valid token", e);
 			}
 		} else {
+			logger.warn("Unable to find bearer string, will ignore header");
 		}
 
 		if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {

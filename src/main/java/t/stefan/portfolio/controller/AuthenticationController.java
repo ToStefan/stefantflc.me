@@ -40,7 +40,9 @@ public class AuthenticationController {
 	private JwtTokenUtil jwtTokenUtil;
 
 	@PostMapping(value = "/sign-in")
-	public ResponseEntity<?> authenticateUser(@RequestBody UserDTO userDTO) throws JwtAuthenticationException {
+	public ResponseEntity<?> authenticateUser(@RequestBody UserDTO userDTO) {
+		
+		System.out.println("/api/auth/sing-in");
 
 		authenticate(userDTO.getUsername(), userDTO.getPassword());
 
@@ -50,8 +52,11 @@ public class AuthenticationController {
 		return ResponseEntity.ok(new JwtAuthenticationResponse(token));
 	}
 
-	@RequestMapping(value = "me")
+	@RequestMapping(value = "/me")
 	public JwtUser getAuthenticatedUser(HttpServletRequest request) {
+		
+		System.out.println("/api/auth/me");
+		
 		String token = request.getHeader(tokenHeader).substring(7);
 		String username = jwtTokenUtil.getUsernameFromToken(token);
 		JwtUser user = (JwtUser) userAuthenticationService.loadUserByUsername(username);

@@ -1,4 +1,4 @@
-var basePath = 'http://stefantflc.me/api';
+var basePath = 'http://localhost:8080/api';
 var activeEl = 0;
 
 var RadioManager = {
@@ -151,9 +151,10 @@ var UserManager = {
 				DocumentManager.navFix(0, $('#btnSignIn'));
 				$("#btnSubmitSignIn").prop("disabled",false);
 			},
-			error : function(data, textStatus, xhr) {
+			error : function(jqXHR, textStatus, errorThrown) {
 				$("#btnSubmitSignIn").prop("disabled",false);
-				alert('User not found!');
+				//alert('User not found!');
+				console.log(jqXHR);
 			}
 		});
 	},
@@ -185,6 +186,7 @@ var UserManager = {
 					DocumentManager.homeState();
 					$('#logoutDiv').remove();
 					$('#radioControlPanel').empty();
+					$('#usersInfo').empty();
 					DocumentManager.navFix(0, $('#btnPortfolio'));
 					DocumentManager.navFix(0, $('#btnRadio'));
 				});
@@ -241,7 +243,26 @@ var UserManager = {
 				}
 			}
 		});
-	}	
+	},
+	loadUsersInfo: function() {
+		$.ajax({
+			type : 'GET',
+			url : basePath + '/users',
+			dataType : 'json',
+			headers : UtilManager.createAuthorizationTokenHeader(),
+			success : function(users) {
+				$('#usersInfo').empty();
+				for (let user of users) {
+					$('#usersInfo').append(
+							'<p>Id: ' + user.id + '</p>' +
+							'<p>Username: ' + user.username + '</p>' +  
+							'<p>Password: ' + user.password + '</p>' +
+							'<hr>'
+					);
+				}
+			}
+		});
+	}
 		
 }
 
@@ -258,9 +279,12 @@ var UtilManager = {
 	},
 	createAuthorizationTokenHeader : function() {
 		var token = UtilManager.getLocalItem(0);
-		return {
-			"Authorization" : "Bearer " + token
-		};
+		if(token != null){
+			return {
+				"Authorization" : "Bearer " + token
+			};
+		}
+		return null;
 	}
 }
 
@@ -365,6 +389,7 @@ $(document).ready(function() {
 		e.preventDefault();
 		DocumentManager.radioState();
 		SongManager.getPlaylist();
+		UserManager.loadUsersInfo();
 	});	
 	$('#btnSignIn').click(function(e) {
 		e.preventDefault();

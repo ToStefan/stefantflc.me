@@ -32,6 +32,8 @@ public class RadioController {
 	@GetMapping(value = "/start-time")
 	public ResponseEntity<?> startTime() {
 
+		System.out.println("/api/radio/start-time");
+
 		Integer startTime;
 
 		try {
@@ -47,6 +49,8 @@ public class RadioController {
 	@GetMapping(value = "/current-song")
 	public ResponseEntity<SongDTO> currentSong() {
 
+		System.out.println("/api/radio/current-song");
+
 		Song song = songService.getById(currentSong.getId());
 		SongDTO songDTO = new SongDTO(song);
 
@@ -55,6 +59,8 @@ public class RadioController {
 
 	@GetMapping(value = "/play")
 	public ResponseEntity<?> play() {
+
+		System.out.println("/api/radio/play");
 
 		List<Song> songs = songService.findAll();
 		for (Song song : songs) {
@@ -68,6 +74,8 @@ public class RadioController {
 
 	@GetMapping(value = "/start")
 	public ResponseEntity<?> start() throws JavaLayerException {
+
+		System.out.println("/api/radio/start");
 
 		List<Song> songs = songService.findAll();
 		songs.removeIf(s -> s.getPlayed() == true);
@@ -89,6 +97,8 @@ public class RadioController {
 	@GetMapping(value = "/stop")
 	public ResponseEntity<?> stop() {
 
+		System.out.println("/api/radio/stop");
+
 		radioPlayer.close();
 
 		List<Song> songs = songService.findAll();
@@ -101,6 +111,8 @@ public class RadioController {
 
 	@GetMapping(value = "/refrash")
 	public ResponseEntity<?> refrash() {
+
+		System.out.println("/api/radio/refrash");
 
 		List<Song> songs = songService.findAll();
 		for (Song song : songs) {

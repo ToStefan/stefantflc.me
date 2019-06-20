@@ -3,23 +3,20 @@ package t.stefan.portfolio.security;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import t.stefan.portfolio.service.UserAuthenticationService;
 
-
 @Configuration
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	@Autowired
@@ -50,14 +47,19 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity httpSecurity) throws Exception {
 
-		httpSecurity.exceptionHandling().authenticationEntryPoint(unauthorizedHandler)
-					.and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-					.and().authorizeRequests()
-				.antMatchers("/", "/favicon.ico", "/**/*.png", "/**/*.gif", "/**/*.svg", "/**/*.jpg", "/**/*.jpeg",
-						"/**/*.html", "/**/*.css", "/**/*.js").permitAll()
-				.antMatchers("/api/**").permitAll()
-				.anyRequest().authenticated();
-		httpSecurity.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
-		httpSecurity.csrf().disable();
+		httpSecurity
+			.exceptionHandling().authenticationEntryPoint(unauthorizedHandler)
+			.and().authorizeRequests()
+			.antMatchers("/", "/favicon.ico", "/**/*.png", "/**/*.gif", "/**/*.svg", "/**/*.jpg", "/**/*.jpeg",
+					"/**/*.html", "/**/*.css", "/**/*.js").permitAll()
+			.antMatchers("/api/auth/**").permitAll()
+			.antMatchers(HttpMethod.GET, "/api/songs/**").permitAll()
+			.antMatchers("/api/users").hasAuthority("ROLE_ADMINISTRATOR")
+			.anyRequest().authenticated();
+		httpSecurity
+			.csrf().disable();
+		httpSecurity
+			.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
+
 	}
 }

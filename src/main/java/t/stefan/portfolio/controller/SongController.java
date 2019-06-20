@@ -28,6 +28,8 @@ public class SongController {
 
 	@GetMapping()
 	public ResponseEntity<List<SongDTO>> getSongs() {
+		
+		System.out.println("/api/songs");
 
 		List<SongDTO> songsDTO = new ArrayList<SongDTO>();
 		List<Song> songs = songService.findAll();
@@ -42,6 +44,8 @@ public class SongController {
 
 	@PostMapping(value = "/add")
 	public ResponseEntity<?> add(@ModelAttribute SongDTO songDTO) throws IOException {
+		
+		System.out.println("/api/songs/add");
 
 		Song song = new Song();
 		song.setSong(songDTO.getSong().getBytes());
@@ -55,6 +59,8 @@ public class SongController {
 
 	@DeleteMapping(value = "/{song-id}")
 	public ResponseEntity<?> delete(@PathVariable("song-id") Long id) {
+		
+		System.out.println("/api/songs/song-id");
 
 		songService.remove(id);
 

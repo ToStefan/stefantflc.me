@@ -23,6 +23,8 @@ public class UserController {
 
 	@GetMapping()
 	public ResponseEntity<List<UserDTO>> getUsers() {
+		
+		System.out.println("/api/users");
 
 		List<UserDTO> usersDTO = new ArrayList<UserDTO>();
 		List<User> users = userService.findAll();

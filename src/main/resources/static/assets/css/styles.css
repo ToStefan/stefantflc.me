@@ -145,7 +145,7 @@ body {
 }
 
 /*  Form's */
-#signInPage, #homePage, #radioPageInfo, #radioPageAll, #portfolioPage {
+#signInPage, #homePage, #radioPageInfo, #radioPageAll, #portfolioPage, #usersInfo {
 	position: relative;
 	left: 50%;
 	border-radius: 5px;
@@ -161,7 +161,11 @@ body {
 	width: 25%;
 }
 
-#radioPageInfo, #radioPageAll {
+#radioPage {
+	margin-bottom: 15%;
+}
+
+#radioPageInfo, #radioPageAll, #usersInfo {
 	width: 45%;
 }
 
