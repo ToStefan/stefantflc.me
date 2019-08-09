@@ -19,5 +19,7 @@ public class ClientDetailsDTO {
     private String country;
     private String city;
     private String ip;
+    private Integer count;
+    private String user;
 
 }

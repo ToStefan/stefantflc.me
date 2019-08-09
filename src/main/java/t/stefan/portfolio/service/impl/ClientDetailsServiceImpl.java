@@ -2,6 +2,7 @@ package t.stefan.portfolio.service.impl;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import t.stefan.portfolio.entity.ClientDetails;
 import t.stefan.portfolio.repository.ClientDetailsRepository;
 import t.stefan.portfolio.service.ClientDetailsService;
 import t.stefan.portfolio.web.dto.ClientDetailsDTO;
@@ -18,8 +19,13 @@ public class ClientDetailsServiceImpl implements ClientDetailsService {
     private final ClientDetailsMapper clientdetailsMapper;
 
     @Override
-    public List<ClientDetailsDTO> findAll() {
-        return clientdetailsMapper.toDTO(clientdetailsRepository.findAll());
+    public List<ClientDetailsDTO> findAllByIp(String ip) {
+        return clientdetailsMapper.toDTO(clientdetailsRepository.findAllByIp(ip));
+    }
+
+    @Override
+    public List<ClientDetailsDTO> findAllGroupByIp() {
+        return clientdetailsMapper.toDTO(clientdetailsRepository.findAllGroupByIp());
     }
 
     @Override
@@ -30,7 +36,11 @@ public class ClientDetailsServiceImpl implements ClientDetailsService {
     @Override
     public void create(ClientDetailsDTO clientDetailsDTO) {
         clientDetailsDTO.setDateTime(LocalDateTime.now());
-        clientdetailsRepository.save(clientdetailsMapper.toEntity(clientDetailsDTO));
+        ClientDetails cd = clientdetailsMapper.toEntity(clientDetailsDTO);
+        if(clientDetailsDTO.getUser() != null){
+            cd.setUser(clientDetailsDTO.getUser());
+        }
+        clientdetailsRepository.save(cd);
     }
 
     @Override

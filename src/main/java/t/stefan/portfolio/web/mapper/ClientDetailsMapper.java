@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import org.springframework.stereotype.Component;
 import t.stefan.portfolio.entity.ClientDetails;
+import t.stefan.portfolio.entity.User;
 import t.stefan.portfolio.web.dto.ClientDetailsDTO;
 
 @Component
@@ -20,6 +21,8 @@ public class ClientDetailsMapper implements Mapper<ClientDetails, ClientDetailsD
         dto.setCountry(clientDetails.getCountry());
         dto.setCity(clientDetails.getCity());
         dto.setIp(clientDetails.getIp());
+        dto.setCount(clientDetails.getCount());
+        dto.setUser(clientDetails.getUser());
         return dto;
     }
 
@@ -42,6 +45,7 @@ public class ClientDetailsMapper implements Mapper<ClientDetails, ClientDetailsD
         entity.setCountry(clientDetailsDTO.getCountry());
         entity.setCity(clientDetailsDTO.getCity());
         entity.setIp(clientDetailsDTO.getIp());
+        entity.setCount(clientDetailsDTO.getCount());
         return entity;
     }
 

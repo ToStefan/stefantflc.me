@@ -17,8 +17,8 @@ public class ClientDetailsController {
     private final ClientDetailsServiceImpl clientdetailsService;
 
     @GetMapping
-    public ResponseEntity<List<ClientDetailsDTO>> findAll() {
-         List<ClientDetailsDTO> dtos = clientdetailsService.findAll();
+    public ResponseEntity<List<ClientDetailsDTO>> findAllByGroupByIp() {
+         List<ClientDetailsDTO> dtos = clientdetailsService.findAllGroupByIp();
          return new ResponseEntity<>(dtos, HttpStatus.OK);
     }
 
@@ -26,6 +26,12 @@ public class ClientDetailsController {
     public ResponseEntity<ClientDetailsDTO> findById(@PathVariable("id") Long id) {
         ClientDetailsDTO dto = clientdetailsService.findById(id);
         return new ResponseEntity<>(dto, HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/ip/{ip}")
+    public ResponseEntity<List<ClientDetailsDTO>> findAllByIp(@PathVariable("ip") String ip) {
+        List<ClientDetailsDTO> dtos = clientdetailsService.findAllByIp(ip);
+        return new ResponseEntity<>(dtos, HttpStatus.OK);
     }
 
     @PostMapping

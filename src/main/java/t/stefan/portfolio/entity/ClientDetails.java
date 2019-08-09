@@ -35,4 +35,8 @@ public class ClientDetails {
 
     private String ip;
 
+    private String user;
+
+    private Integer count;
+
 }
