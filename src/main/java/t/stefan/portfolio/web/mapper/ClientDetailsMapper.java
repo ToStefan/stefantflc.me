@@ -23,6 +23,7 @@ public class ClientDetailsMapper implements Mapper<ClientDetails, ClientDetailsD
         dto.setIp(clientDetails.getIp());
         dto.setCount(clientDetails.getCount());
         dto.setUser(clientDetails.getUser());
+        dto.setPath(clientDetails.getPath());
         return dto;
     }
 
@@ -46,6 +47,7 @@ public class ClientDetailsMapper implements Mapper<ClientDetails, ClientDetailsD
         entity.setCity(clientDetailsDTO.getCity());
         entity.setIp(clientDetailsDTO.getIp());
         entity.setCount(clientDetailsDTO.getCount());
+        entity.setPath(clientDetailsDTO.getPath());
         return entity;
     }
 

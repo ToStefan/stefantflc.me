@@ -13,6 +13,6 @@ public interface ClientDetailsRepository extends JpaRepository<ClientDetails, Lo
 
     List<ClientDetails> findAllByIp(String ip);
 
-    @Query(value = "SELECT MAX(id) as id, COUNT(id) as count, date_time, user_agent, location, region, country, city, ip, user FROM client_details GROUP BY ip", nativeQuery = true)
+    @Query(value = "SELECT MAX(id) as id, COUNT(id) as count, date_time, user_agent, location, region, country, city, ip, user, path FROM client_details GROUP BY ip", nativeQuery = true)
     List<ClientDetails> findAllGroupByIp();
 }

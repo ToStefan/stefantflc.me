@@ -21,5 +21,6 @@ public class ClientDetailsDTO {
     private String ip;
     private Integer count;
     private String user;
+    private String path;
 
 }

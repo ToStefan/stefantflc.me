@@ -39,4 +39,5 @@ public class ClientDetails {
 
     private Integer count;
 
+    private String path;
 }
