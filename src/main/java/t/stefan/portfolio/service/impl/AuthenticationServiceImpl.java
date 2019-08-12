@@ -9,8 +9,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import t.stefan.portfolio.entity.Role;
 import t.stefan.portfolio.entity.RoleName;
-import t.stefan.portfolio.exception.UserVerificationException;
-import t.stefan.portfolio.exception.UsernameAlreadyExistException;
+import t.stefan.portfolio.exception.UserAlreadyExistException;
 import t.stefan.portfolio.repository.RoleRepository;
 import t.stefan.portfolio.repository.UserRepository;
 import t.stefan.portfolio.security.JwtAuthenticationResponse;
@@ -42,7 +41,6 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
     @Override
     public JwtAuthenticationResponse login(UserDTO userDto) {
-
         authenticate(userDto.getUsername(), userDto.getPassword());
         UserDetails userDetails = userAuthService.loadUserByUsername(userDto.getUsername());
         String token = jwtTokenUtil.generateToken(userDetails);
@@ -51,10 +49,10 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
     @Override
     public UserDTO register(UserDTO userDto) {
-
-        if ((userRepository.existsByUsername(userDto.getUsername())) == true) {
-            throw new UsernameAlreadyExistException(userDto.getUsername());
-        }
+        if ((userRepository.existsByUsername(userDto.getUsername())) == true)
+            throw new UserAlreadyExistException(userDto.getUsername());
+        if((userRepository.existsByEmail(userDto.getEmail())) == true)
+            throw new UserAlreadyExistException(userDto.getEmail());
 
         List<Role> roles = new ArrayList<>();
         roles.add(roleRepository.findByName(RoleName.ROLE_GUEST));
@@ -69,7 +67,6 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
     @Override
     public UserPrincipal me(HttpServletRequest request) {
-
         String token = request.getHeader(Constants.tokenHeader).substring(7);
         String username = jwtTokenUtil.getUsernameFromToken(token);
         UserPrincipal user = (UserPrincipal) userAuthService.loadUserByUsername(username);
@@ -79,10 +76,8 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     private void authenticate(String username, String password) {
         Objects.requireNonNull(username);
         Objects.requireNonNull(password);
-        try {
+        try{
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
-        } catch (AuthenticationException e) {
-            throw new UserVerificationException();
-        }
+        } catch(AuthenticationException e){}
     }
 }
