@@ -1,6 +1,7 @@
 package t.stefan.portfolio.security;
 
 import io.jsonwebtoken.ExpiredJwtException;
+import io.jsonwebtoken.MalformedJwtException;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -38,9 +39,11 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             try {
                 username = jwtTokenUtil.getUsernameFromToken(authToken);
             } catch (IllegalArgumentException e) {
-                log.warn("Error while parsing username from token!");
+                log.warn("Error while parsing username from token");
             } catch (ExpiredJwtException e) {
-                log.warn("Token expired or not valid!");
+                log.warn("Token expired or not valid");
+            } catch (MalformedJwtException e) {
+                log.warn("JWT strings must contain exactly 2 period characters");
             }
         } else {
             log.warn("Can't find bearer string!");
