@@ -6,5 +6,5 @@ public class Constants {
     public final static Integer jwtExpirationInMs = 864000000;
     public final static String appMail = "stefantflc@gmail.com";
     public final static String appMailPass = "portfolio12345";
-    public final static String basePath = "http://www.stefantflc.me";
+    public final static String basePath = "https://www.stefantflc.me";
 }
