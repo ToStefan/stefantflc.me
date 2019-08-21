@@ -11,3 +11,9 @@ logging:
     org:
       hibernate:
         SQL: debug
+domain:
+  url: https://www.stefantflc.me
+rethinkdb:
+  url: ${RETHINKDB_URL}
+  user: ${RETHINK_USER}
+  pass: ${RETHINK_PASS}

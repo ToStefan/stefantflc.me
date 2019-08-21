@@ -1,10 +1,10 @@
 package t.stefan.portfolio.util;
 
 public class Constants {
-    public final static String tokenHeader = "Authorization";
-    public final static String jwtSecret = "secret";
-    public final static Integer jwtExpirationInMs = 864000000;
-    public final static String appMail = "stefantflc@gmail.com";
-    public final static String appMailPass = "portfolio12345";
-    public final static String basePath = "https://www.stefantflc.me";
+    public final static String TOKEN_HEADER = "Authorization";
+    public final static String JWT_SECRET = "secret";
+    public final static Integer JWT_EXPIRATION_IN_MS = 864000000;
+    public final static String APP_MAIL = "stefantflc@gmail.com";
+    public final static String APP_MAIL_PASS = "portfolio12345";
+    public final static String RETHINK_DB_NAME = "stefantflcDB";
 }

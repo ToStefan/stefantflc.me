@@ -34,7 +34,7 @@ public class JwtTokenUtil {
         final Date expirationDate = calculateExpirationDate(createdDate);
 
         return Jwts.builder().setClaims(claims).setSubject(subject).setIssuedAt(createdDate)
-                .setExpiration(expirationDate).signWith(SignatureAlgorithm.HS512, Constants.jwtSecret).compact();
+                .setExpiration(expirationDate).signWith(SignatureAlgorithm.HS512, Constants.JWT_SECRET).compact();
     }
 
     public Boolean validateToken(String token, UserDetails userDetails) {
@@ -44,11 +44,11 @@ public class JwtTokenUtil {
     }
 
     private Date calculateExpirationDate(Date createdDate) {
-        return new Date(createdDate.getTime() + Constants.jwtExpirationInMs * 1000);
+        return new Date(createdDate.getTime() + Constants.JWT_EXPIRATION_IN_MS * 1000);
     }
 
     private Claims getAllClaimsFromToken(String token) {
-        return Jwts.parser().setSigningKey(Constants.jwtSecret).parseClaimsJws(token).getBody();
+        return Jwts.parser().setSigningKey(Constants.JWT_SECRET).parseClaimsJws(token).getBody();
     }
 
     private <T> T getClaimFromToken(String token, Function<Claims, T> claimsResolver) {

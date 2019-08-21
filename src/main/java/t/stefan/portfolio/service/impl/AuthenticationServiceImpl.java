@@ -67,7 +67,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
     @Override
     public UserPrincipal me(HttpServletRequest request) {
-        String token = request.getHeader(Constants.tokenHeader).substring(7);
+        String token = request.getHeader(Constants.TOKEN_HEADER).substring(7);
         String username = jwtTokenUtil.getUsernameFromToken(token);
         UserPrincipal user = (UserPrincipal) userAuthService.loadUserByUsername(username);
         return user;

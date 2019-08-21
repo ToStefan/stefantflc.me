@@ -44,11 +44,9 @@ public class ClientDetailsController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<HttpStatus> delete(@PathVariable("id") Long id) {
         clientdetailsService.remove(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
-
 }

@@ -1,7 +1,7 @@
 package t.stefan.portfolio.service.impl;
 
-import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import t.stefan.portfolio.entity.ConfirmationToken;
 import t.stefan.portfolio.service.MailService;
@@ -17,17 +17,23 @@ import java.util.Properties;
 
 @Slf4j
 @Service
-@AllArgsConstructor
 public class MailServiceImpl implements MailService {
+
+    @Value("${domain.url}")
+    private String basePath;
 
     private final ConfirmationTokenServiceImpl confirmTokenService;
     private final UserMapper userMapper;
 
+    public MailServiceImpl(ConfirmationTokenServiceImpl confirmTokenService, UserMapper userMapper) {
+        this.confirmTokenService = confirmTokenService;
+        this.userMapper = userMapper;
+    }
+
     @Override
     public void userConfirmation(UserDTO user) {
-
         ConfirmationToken token = confirmTokenService.generateToken(userMapper.toEntity(user));
-        String confirmLink = Constants.basePath + "/api/tokens/confirm/" + token.getConfirmationToken();
+        String confirmLink = basePath + "/api/tokens/confirm/" + token.getConfirmationToken();
 
         String body = "<h3 style=\"color:green;\">Account confirmation!</h3>" +
                 "<p>Click " +
@@ -44,7 +50,7 @@ public class MailServiceImpl implements MailService {
 
         Message msg = new MimeMessage(getMailProps());
         try {
-            msg.setFrom(new InternetAddress(Constants.appMail, false));
+            msg.setFrom(new InternetAddress(Constants.APP_MAIL, false));
             msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(mail.getRecipient()));
             msg.setSubject(mail.getSubject());
             msg.setContent(mail.getContent(), "text/html");
@@ -56,7 +62,7 @@ public class MailServiceImpl implements MailService {
         }
     }
 
-    private Session getMailProps(){
+    private Session getMailProps() {
         Properties props = new Properties();
         props.put("mail.smtp.auth", "true");
         props.put("mail.smtp.starttls.enable", "true");
@@ -65,7 +71,7 @@ public class MailServiceImpl implements MailService {
 
         Session session = Session.getInstance(props, new Authenticator() {
             protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication(Constants.appMail, Constants.appMailPass);
+                return new PasswordAuthentication(Constants.APP_MAIL, Constants.APP_MAIL_PASS);
             }
         });
         return session;
