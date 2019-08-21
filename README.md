@@ -3,6 +3,9 @@
 
 ### Core artifacts
 * Java 8
-* Spring boot
-* Spring security
+* Spring Boot
+* Spring Security
 * JWT
+* Websockets
+* RethinkDB
+* MySQL
