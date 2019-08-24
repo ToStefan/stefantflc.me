@@ -17,3 +17,7 @@ rethinkdb:
   url: ${RETHINKDB_URL}
   user: ${RETHINK_USER}
   pass: ${RETHINK_PASS}
+mail:
+  pass : ${APP_MAIL_PASS}
+jwt:
+  secret: ${JWT_SECRET}

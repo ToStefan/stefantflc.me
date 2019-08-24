@@ -5,6 +5,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
 import t.stefan.portfolio.entity.User;
+import t.stefan.portfolio.exception.InvalidUserException;
 import t.stefan.portfolio.exception.UserVerificationException;
 import t.stefan.portfolio.repository.UserRepository;
 
@@ -18,7 +19,7 @@ public class UserAuthenticationService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) {
         User user = userRepository.findByUsername(username);
         if(user == null)
-            throw new UserVerificationException("Bad credentials");
+            throw new InvalidUserException();
         else if(user.getIsEnabled() == false)
             throw new UserVerificationException("User e-mail not confirmed");
         return UserPrincipal.create(user);

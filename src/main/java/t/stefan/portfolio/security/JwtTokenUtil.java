@@ -5,6 +5,7 @@ import io.jsonwebtoken.Clock;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.impl.DefaultClock;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 import t.stefan.portfolio.util.Constants;
@@ -20,6 +21,9 @@ public class JwtTokenUtil {
 
     private Clock clock = DefaultClock.INSTANCE;
 
+    @Value("${jwt.secret}")
+    private String jwtSecret;
+
     public String getUsernameFromToken(String token) {
         return getClaimFromToken(token, Claims::getSubject);
     }
@@ -34,7 +38,7 @@ public class JwtTokenUtil {
         final Date expirationDate = calculateExpirationDate(createdDate);
 
         return Jwts.builder().setClaims(claims).setSubject(subject).setIssuedAt(createdDate)
-                .setExpiration(expirationDate).signWith(SignatureAlgorithm.HS512, Constants.JWT_SECRET).compact();
+                .setExpiration(expirationDate).signWith(SignatureAlgorithm.HS512, jwtSecret).compact();
     }
 
     public Boolean validateToken(String token, UserDetails userDetails) {
@@ -48,7 +52,7 @@ public class JwtTokenUtil {
     }
 
     private Claims getAllClaimsFromToken(String token) {
-        return Jwts.parser().setSigningKey(Constants.JWT_SECRET).parseClaimsJws(token).getBody();
+        return Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(token).getBody();
     }
 
     private <T> T getClaimFromToken(String token, Function<Claims, T> claimsResolver) {

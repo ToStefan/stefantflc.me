@@ -22,6 +22,9 @@ public class MailServiceImpl implements MailService {
     @Value("${domain.url}")
     private String basePath;
 
+    @Value("${mail.pass}")
+    private String appMail;
+
     private final ConfirmationTokenServiceImpl confirmTokenService;
     private final UserMapper userMapper;
 
@@ -71,7 +74,7 @@ public class MailServiceImpl implements MailService {
 
         Session session = Session.getInstance(props, new Authenticator() {
             protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication(Constants.APP_MAIL, Constants.APP_MAIL_PASS);
+                return new PasswordAuthentication(Constants.APP_MAIL, appMail);
             }
         });
         return session;
