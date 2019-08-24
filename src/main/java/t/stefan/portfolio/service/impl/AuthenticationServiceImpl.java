@@ -9,6 +9,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import t.stefan.portfolio.entity.Role;
 import t.stefan.portfolio.entity.RoleName;
+import t.stefan.portfolio.exception.InvalidUserException;
 import t.stefan.portfolio.exception.UserAlreadyExistException;
 import t.stefan.portfolio.repository.RoleRepository;
 import t.stefan.portfolio.repository.UserRepository;
@@ -78,6 +79,8 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         Objects.requireNonNull(password);
         try{
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
-        } catch(AuthenticationException e){}
+        } catch(AuthenticationException e){
+            throw new InvalidUserException();
+        }
     }
 }

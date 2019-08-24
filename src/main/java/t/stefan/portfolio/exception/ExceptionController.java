@@ -30,6 +30,13 @@ public class ExceptionController {
         return new ExceptionResponse(exception.getMessage(), request.getRequestURI());
     }
 
+    @ExceptionHandler(value = InvalidUserException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ExceptionResponse handleInvalidUser(final InvalidUserException exception,
+                                                    final HttpServletRequest request) {
+        return new ExceptionResponse(exception.getMessage(), request.getRequestURI());
+    }
+
     @ExceptionHandler(Exception.class)
     @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR)
     public ExceptionResponse handleException(final Exception exception,
