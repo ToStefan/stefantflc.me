@@ -21,3 +21,6 @@ mail:
   pass : ${APP_MAIL_PASS}
 jwt:
   secret: ${JWT_SECRET}
+dropbox:
+  token: ${DROPBOX_TOKEN}
+  env: ${DROPBOX_ENV}
