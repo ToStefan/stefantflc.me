@@ -1,3 +1,6 @@
+python:
+  import:
+    site: false
 spring:
   datasource:
     url: ${SPRING_DATASOURCE_URL}
