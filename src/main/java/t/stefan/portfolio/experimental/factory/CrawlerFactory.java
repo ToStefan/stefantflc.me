@@ -10,6 +10,7 @@ public class CrawlerFactory implements FactoryBean<CrawlerService> {
 
 	@Override
 	public CrawlerService getObject() throws Exception {
+		
 		PythonInterpreter interpreter = new PythonInterpreter();
 		interpreter.execfile("src\\main\\java\\t\\stefan\\portfolio\\experimental\\crawler\\crawler_main.py");
 		PyObject buildingObject = interpreter.get("Builder").__call__();
