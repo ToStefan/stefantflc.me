@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import lombok.AllArgsConstructor;
-import t.stefan.portfolio.bridge.CrawlerService;
+import t.stefan.jython.bridge.CrawlerService;
 
 @AllArgsConstructor
 @RestController

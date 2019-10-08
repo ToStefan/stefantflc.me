@@ -1,4 +1,4 @@
-package t.stefan.portfolio.bridge;
+package t.stefan.jython.bridge;
 
 public interface CrawlerService {
 

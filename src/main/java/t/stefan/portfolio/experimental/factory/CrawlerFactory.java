@@ -4,7 +4,7 @@ import org.python.core.PyObject;
 import org.python.util.PythonInterpreter;
 import org.springframework.beans.factory.FactoryBean;
 
-import t.stefan.portfolio.bridge.CrawlerService;
+import t.stefan.jython.bridge.CrawlerService;
 
 public class CrawlerFactory implements FactoryBean<CrawlerService> {
 
@@ -12,7 +12,7 @@ public class CrawlerFactory implements FactoryBean<CrawlerService> {
 	public CrawlerService getObject() throws Exception {
 
 		PythonInterpreter interpreter = new PythonInterpreter();
-		interpreter.execfile("src\\main\\python\\t\\stefan\\portfolio\\crawlers\\crawler_main.py");
+		interpreter.execfile("src\\main\\python\\t\\stefan\\jython\\crawler\\crawler_main.py");
 		PyObject buildingObject = interpreter.get("Builder").__call__();
 
 		return (CrawlerService) buildingObject.__tojava__(CrawlerService.class);
