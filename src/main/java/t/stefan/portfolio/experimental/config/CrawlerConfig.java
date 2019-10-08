@@ -3,7 +3,7 @@ package t.stefan.portfolio.experimental.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import t.stefan.jython.bridge.CrawlerService;
+import t.stefan.portfolio.experimental.bridge.CrawlerService;
 import t.stefan.portfolio.experimental.factory.CrawlerFactory;
 
 @Configuration

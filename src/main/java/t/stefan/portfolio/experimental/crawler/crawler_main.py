@@ -1,4 +1,4 @@
-from t.stefan.jython.bridge import CrawlerService
+from t.stefan.portfolio.experimental.bridge import CrawlerService
 
 class Builder(CrawlerService):
 

@@ -1,4 +1,4 @@
-package t.stefan.jython.bridge;
+package t.stefan.portfolio.experimental.bridge;
 
 public interface CrawlerService {
 	String hello();
