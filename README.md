@@ -10,3 +10,7 @@
 * RethinkDB
 * MySQL
 * Dropbox API
+* Python 3
+* Flask
+* Docker
+* Amazon Web Services

@@ -1,14 +1,14 @@
 package t.stefan.portfolio.service.impl;
 
 import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Service;
+
+import lombok.AllArgsConstructor;
 import t.stefan.portfolio.repository.UserRepository;
 import t.stefan.portfolio.service.UserService;
 import t.stefan.portfolio.web.dto.UserDTO;
 import t.stefan.portfolio.web.mapper.UserMapper;
-
-import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
 @Service

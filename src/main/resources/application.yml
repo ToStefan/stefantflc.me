@@ -24,3 +24,5 @@ jwt:
 dropbox:
   token: ${DROPBOX_TOKEN}
   env: ${DROPBOX_ENV}
+aws:
+  basepath: ${AWS_BASEPATH}
