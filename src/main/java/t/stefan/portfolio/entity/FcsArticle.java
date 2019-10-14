@@ -5,7 +5,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Lob;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
@@ -30,7 +29,7 @@ public class FcsArticle {
     @NotNull
     private String date;
     
-    @NotNull
+    @Column(length = 65535, columnDefinition="TEXT", nullable = false)
     private String description;
     
     @NotNull
@@ -42,8 +41,7 @@ public class FcsArticle {
     @NotNull
     private String picture;
     
-    @Lob
-    @Column(name="content", columnDefinition="LONGBLOB")
+    @Column(length = 65535, columnDefinition="TEXT", nullable = false)
     private String content;
 
 }
