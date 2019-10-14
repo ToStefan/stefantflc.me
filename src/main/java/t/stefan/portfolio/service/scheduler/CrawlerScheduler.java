@@ -14,7 +14,7 @@ public class CrawlerScheduler {
 	
 	private final FcsArticleServiceImpl fcsNewsService;
 	
-	@Scheduled(cron = "* * */1 * * *")
+	@Scheduled(cron = "0 0 * ? * *")
 	public void fcsCrawlerScheduler() {
 		log.info("Fcs crawler started...");
 		fcsNewsService.startCrawler();
