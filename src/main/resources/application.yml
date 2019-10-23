@@ -6,6 +6,10 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
+      connection:
+        characterEncoding: utf8
+        charSet: utf8
+        useUnicode: true
 logging:
   level:
     org:
